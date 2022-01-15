@@ -17,4 +17,4 @@
 # Canvas-specific .results.json
 .results.json
 
-/db/migrate
+/db/migrate 
