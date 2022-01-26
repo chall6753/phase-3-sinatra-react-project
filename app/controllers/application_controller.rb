@@ -24,7 +24,7 @@ class ApplicationController < Sinatra::Base
     comments=Comment.find_each.filter do |comment|
       comment.recipe_id == params['id'].to_i
     end
-    chef = Chef.find_by id: params['id']
+    chef = Chef.find_by id: recipe.chef_id
     response={}
     ingredients = recipe.ingredients
     response[:ingredients] =ingredients 
@@ -36,20 +36,10 @@ class ApplicationController < Sinatra::Base
   post "/register" do
     username = params['username']
     password = params['password']
-    # go through usernames and make sure the username does not already exist
-    users = User.all
-    x=0
-    users.each {|user| 
-      if user.username == username
-        x+=1
-      end
-    }
-    puts x
-    if x>0 
-      "username already exists".to_json
-    else
-      User.create(username: username, password: password)
-      "user created successfully".to_json
+    user = User.create(username: username, password: password)
+    if user.valid? == true
+      "User Created!".to_json
+      else "Username already exists".to_json
     end
   end
   ################################################################
@@ -80,6 +70,7 @@ class ApplicationController < Sinatra::Base
       recipe.instructions = instructions 
     end
     puts x
+    
     #Find out if recipe has ingredients already in the ingredients table. if not create new ingredient
     newRecipeIngredients.map do |ingredient|
       binding.pry
