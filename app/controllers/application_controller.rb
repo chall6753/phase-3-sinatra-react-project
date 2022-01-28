@@ -65,11 +65,11 @@ class ApplicationController < Sinatra::Base
     instructions = params['instructions']
     
     #create new recipe
-    Recipe.where(chef_id: chefId).find_or_create_by(recipe_name: recipeName) do |recipe|
+   x = Recipe.where(chef_id: chefId).find_or_create_by(recipe_name: recipeName) do |recipe|
       recipe.chef_id = chefId
       recipe.instructions = instructions 
     end
-    
+    binding.pry
     
     #Find out if recipe has ingredients already in the ingredients table. if not create new ingredient
     newRecipeIngredients.map do |ingredient|
