@@ -65,15 +65,15 @@ class ApplicationController < Sinatra::Base
     instructions = params['instructions']
     
     #create new recipe
-    x = Recipe.where(chef_id: chefId).find_or_create_by(recipe_name: recipeName) do |recipe|
+    Recipe.where(chef_id: chefId).find_or_create_by(recipe_name: recipeName) do |recipe|
       recipe.chef_id = chefId
       recipe.instructions = instructions 
     end
-    puts x
+    
     
     #Find out if recipe has ingredients already in the ingredients table. if not create new ingredient
     newRecipeIngredients.map do |ingredient|
-      binding.pry
+      
       if Ingredient.find_by(ingredient: ingredient['ingredient'].downcase) #if ingredient already exists create RecipeIngredient instance with the already existing ingredient_id
         ingredient_id = Ingredient.find_by(ingredient: ingredient['ingredient']).id
         RecipeIngredient.create(recipe_id: Recipe.last.id, ingredient_id: ingredient_id, quantity: ingredient['quantity'], unit: ingredient['unit'])
@@ -83,5 +83,12 @@ class ApplicationController < Sinatra::Base
       end
     end
     "Recipe Created".to_json
+  end
+  #######################################################################################
+  delete "/recipes/:id" do 
+    recipe = Recipe.find_by id: params['id']
+    
+    recipe.destroy
+    "Recipe Deleted".to_json
   end
 end
