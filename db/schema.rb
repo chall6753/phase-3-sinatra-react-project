@@ -12,40 +12,5 @@
 
 ActiveRecord::Schema.define(version: 2022_01_19_145730) do
 
-  create_table "chefs", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.text "bio"
-    t.integer "username_id"
-  end
-
-  create_table "comments", force: :cascade do |t|
-    t.string "comment"
-    t.string "username"
-    t.integer "recipe_id"
-    t.integer "chef_id"
-  end
-
-  create_table "ingredients", force: :cascade do |t|
-    t.string "ingredient"
-  end
-
-  create_table "recipe_ingredients", force: :cascade do |t|
-    t.integer "recipe_id"
-    t.integer "ingredient_id"
-    t.float "quantity"
-    t.string "unit"
-  end
-
-  create_table "recipes", force: :cascade do |t|
-    t.string "recipe_name"
-    t.integer "chef_id"
-    t.string "instructions"
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string "username"
-    t.string "password"
-  end
 
 end
