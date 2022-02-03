@@ -12,4 +12,6 @@ end
 use Rack::JSONBodyParser
 
 # Our application
+use UserController
+use RecipeController
 run ApplicationController
