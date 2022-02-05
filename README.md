@@ -4,3 +4,5 @@ This project was created to do the server side handling for The Social Chef fron
 
 We used the "thin" webserver combined with "rack" middle ware and Sinatra to handle the routes and Active record to handle data in the database.
 
+To run the server use the command rake server and the host is local host listening on port :9292.
+
