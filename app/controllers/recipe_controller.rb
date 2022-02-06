@@ -3,8 +3,9 @@ class RecipeController < ApplicationController
         Recipe.all.to_json(include: [:ingredients, :user, :recipe_ingredients] )
     end
     get '/recipes/:id' do 
-        @recipe = Recipe.find(params['id']).to_json(:include => [:user, :ingredients => { :include=> :recipe_ingredients}])
-               
+        # @recipe = Recipe.find(params['id']).to_json(:include => [:user, :ingredients => { :include=> :recipe_ingredients}])
+        @recipe = Recipe.find(params['id']).to_json(:include => [:user, :recipe_ingredients => {:include => :ingredient}])
+        # binding.pry
     end
     delete '/recipes/:id/delete_recipe' do
         @recipe = Recipe.find(params['id'])
