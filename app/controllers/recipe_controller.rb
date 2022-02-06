@@ -28,7 +28,7 @@ class RecipeController < ApplicationController
                 @recipe.recipe_ingredients.create(quantity: recipe['quantity'], unit: recipe['unit'], ingredient_id: @recipeIngredient.id)
             end
         end
-            @recipe.to_json(:include => [:ingredients, :user])
+            @recipe.to_json(:include => [:user])
     end
 
 end
